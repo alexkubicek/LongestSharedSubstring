@@ -69,34 +69,6 @@ def condense_tree(tree):
         tree.children = child.children
 
 
-def prefix_trie_matching(text, tri):
-    matches = []
-    cur = tri
-    pattern = str()
-    no_match = False
-    for c in text:
-        if c in cur.children.keys():
-            cur = cur.children[c]
-            pattern += c
-        else:
-            matches.append(pattern)
-            no_match = True
-            break
-    if not no_match:
-        matches.append(pattern)
-    return matches
-
-
-def get_longest_shared(second_patterns, tree):
-    longest_match = str()
-    for suffix in second_patterns:
-        all_matches = prefix_trie_matching(suffix, tree)
-        all_matches.sort(key=len, reverse=True)
-        if len(all_matches[0]) > len(longest_match):
-            longest_match = all_matches[0]
-    return longest_match
-
-
 def get_longest_shared_sub(tree_to_search, longest_found):
     if tree_to_search.string_source > 0:
         return str()
